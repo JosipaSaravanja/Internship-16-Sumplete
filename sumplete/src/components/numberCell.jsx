@@ -13,7 +13,7 @@ export const NumberCell = (props) => {
     } else if(props.data.state==="o"){
       setName("notSolution")
     }
-  }, [[props.data.state]]);
+  }, [props.data.state]);
   
   return <div onClick={()=>props.handleClick(props.id)} className={name}>
     {props.data.number}

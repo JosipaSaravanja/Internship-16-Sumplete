@@ -28,7 +28,7 @@ select{
 .grid{
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(5, 150px);
+  grid-template-columns: repeat(4, 150px);
 }
 
 .sum-cell, .number-cell, .solution, .notSolution{
