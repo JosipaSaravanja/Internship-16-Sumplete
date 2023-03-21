@@ -31,8 +31,7 @@ select{
   grid-template-columns: repeat(5, 150px);
 }
 
-
-.sum-cell, .number-cell{
+.sum-cell, .number-cell, .solution, .notSolution{
   color: black;
   display: flex;
   align-items: center;
@@ -41,7 +40,19 @@ select{
   height: 150px;
 }
 
-.number-cell{
+.number-cell, .solution, .notSolution{
   background-color: rgb(204, 200, 200, 0.3);
   border: 1px solid black;
+}
+
+.solution{
+  background-color: rgb(165, 42, 42, 0.5);
+}
+
+.notSolution{
+  background-color: rgb(0, 128, 0, 0.5);
+}
+
+.gray{
+  color: gray;
 }

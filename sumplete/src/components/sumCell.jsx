@@ -10,3 +10,7 @@ export const SumCell = (props) => {
     {props.data.number}
     </div>;
 };
+
+
+
+

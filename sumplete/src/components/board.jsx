@@ -7,7 +7,7 @@ export const Board=(props)=>{
     <div className="grid" style={props.getStyle()}>
         {props.data.map((data, index)=>{
             if(data.state!==undefined){
-                return <NumberCell  data={data} id={index}></NumberCell>
+                return <NumberCell handleClick={props.changeState} data={data} id={index}></NumberCell>
             } else {
                 return <SumCell data={data} id={index}></SumCell>
             }
