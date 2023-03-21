@@ -19,16 +19,18 @@ body{
   font-weight: bold;
 }
 
+select{
+  width: 100px;
+  padding: 15px 10px;
+  margin-right: 15px;
+}
+
 .grid{
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(5, 150px);
 }
 
-.newGame{
-  display: flex;
-  flex-direction: row;
-}
 
 .sum-cell, .number-cell{
   color: black;

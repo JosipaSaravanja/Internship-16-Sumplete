@@ -9,26 +9,28 @@ import { useEffect } from "react";
 
 function App() {
   const [n, setNumber] = useState(3);
-  let newGame= JSON.parse(localStorage.getItem("game")) || new Game(n).data;
-  const [data, setData] = useState(newGame);
+  let game= JSON.parse(localStorage.getItem("game")) || new Game(n).data;
+  const [data, setData] = useState(game);
 console.log(data)
 
   useEffect(() => {
     setData(new Game(n).data)
-    
   }, [n]);
+
+  const newGame = () => {
+    console.log(n)
+    setData(new Game(4).data);
+  };
 
   const getStyle=()=>{
     const a ="repeat(" +(Number(n)+1) +", 150px)"
-    return {  gridTemplateColumns: a}
+    return {gridTemplateColumns: a}
   }
 
   return (
     <div className="App">    
       <Board getStyle={getStyle} n={n} data={data}></Board>
-      <div className="newGame">
-        <Select handleChange={setNumber}></Select>
-      </div>
+      <Select handleChange={setNumber}></Select>
     </div>
   );
 }
