@@ -46,15 +46,35 @@ function App() {
       return "";
     }
   };
-  
+
   const getStyle=()=>{
     const a ="repeat(" +(Number(n)+1) +", 150px)"
     return {gridTemplateColumns: a}
   }
 
+  const sum = (index) => {
+    let sum = 0;
+    if (index % (n+1) == n) {
+      for (let i = 1; i <= n; i++) {
+        let el = data[index - i];
+        if (el.state != "×") {
+          sum += el.number;
+        }
+      }
+    } else if (index >=n*(n+1)) {
+      for (let i = 1; i <= n; i++) {
+        let el = data[index - i * (n+1)];
+        if (el.state != "×") {
+          sum += el.number;
+        }
+      }
+    }
+    return sum;
+  };
+
   return (
     <div className="App">    
-      <Board changeState={changeState} getStyle={getStyle} n={n} data={data}></Board>
+      <Board sum={sum} changeState={changeState} getStyle={getStyle} n={n} data={data}></Board>
       <Select handleChange={setNumber}></Select>
     </div>
   );

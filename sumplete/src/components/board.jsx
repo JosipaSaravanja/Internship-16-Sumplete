@@ -9,7 +9,7 @@ export const Board=(props)=>{
             if(data.state!==undefined){
                 return <NumberCell handleClick={props.changeState} data={data} id={index}></NumberCell>
             } else {
-                return <SumCell data={data} id={index}></SumCell>
+                return <SumCell sum={props.sum} data={data} id={index}></SumCell>
             }
         })}
     </div>
