@@ -8,21 +8,21 @@ import { useEffect } from "react";
 
 
 function App() {
-  const [n, setNumber] = useState(3);
-  const [n2, setNumber2] = useState(4);
+  const [n, setNumber] = useState(localStorage.getItem("game") ? Math.sqrt(JSON.parse(localStorage.getItem("game")).length+1)-1 : 3);
+  const [tempNum, setTempNum] = useState();
   let game= JSON.parse(localStorage.getItem("game")) || new Game(n).data;
+
   console.log("game")
   console.log(game)
   const [data, setData] = useState(game);
   const [finishStatus, setStatus] = useState(false);
 
   const newGame=()=>{
-    setNumber(Number(n2))
-    console.log(n2, n)
-    setData(new Game(Number(n2)).data)
+    setNumber(Number(tempNum))
+    console.log(tempNum, n)
+    setData(new Game(Number(tempNum)).data)
   }
-  
-  
+    
   const changeState = (id) => {
     setData((prev) => [
       ...prev.map((el, index) => {
@@ -121,7 +121,7 @@ function App() {
       <Board sum={sum} changeState={changeState} getStyle={getStyle} n={n} data={data}></Board>
       <div style={finishStatus? {display: "flex"}: {display: "none"}}>
         <button onClick={() => newGame()}> Restart</button>
-        <Select handleChange={setNumber2}></Select>
+        <Select handleChange={setTempNum}></Select>
       </div>
     </div>
   );
