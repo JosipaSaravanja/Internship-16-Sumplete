@@ -19,16 +19,21 @@ body{
   font-weight: bold;
 }
 
-select{
-  width: 100px;
+select, button{
+  width: 75px;
   padding: 15px 10px;
   margin-right: 15px;
 }
 
+.buttons{
+  display: flex;
+  flex-direction: row;
+}
+
 .grid{
-  margin-top: 50px;
+  margin-top: 25px;
   display: grid;
-  grid-template-columns: repeat(4, 150px);
+  grid-template-columns: repeat(4, 100px);
 }
 
 .sum-cell, .number-cell, .solution, .notSolution{
@@ -36,8 +41,8 @@ select{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 
 .number-cell, .solution, .notSolution{

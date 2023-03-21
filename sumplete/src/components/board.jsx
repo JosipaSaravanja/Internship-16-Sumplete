@@ -11,7 +11,7 @@ export const Board=(props)=>{
     }
 
   return (
-    <div className="grid" style={props.getStyle()}>
+    <div className="grid" style={{gridTemplateColumns: "repeat(" +(Number(props.n)+1) +", 100px)"}}>
         {props.data.map((data, index)=>{
             if(data.state!==undefined){
                 return <NumberCell handleClick={props.changeState} data={data} id={index}></NumberCell>

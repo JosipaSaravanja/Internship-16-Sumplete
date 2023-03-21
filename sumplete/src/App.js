@@ -10,11 +10,7 @@ import { useEffect } from "react";
 function App() {
   const [n, setNumber] = useState(localStorage.getItem("game") ? Math.sqrt(JSON.parse(localStorage.getItem("game")).length+1)-1 : 3);
   const [tempNum, setTempNum] = useState();
-  let game= JSON.parse(localStorage.getItem("game")) || new Game(n).data;
-
-  console.log("game")
-  console.log(game)
-  const [data, setData] = useState(game);
+  const [data, setData] = useState(JSON.parse(localStorage.getItem("game")) || new Game(n).data);
   const [finishStatus, setStatus] = useState(false);
 
   const newGame=()=>{
@@ -22,7 +18,19 @@ function App() {
     console.log(tempNum, n)
     setData(new Game(Number(tempNum)).data)
   }
-    
+   
+  const Restart=()=>{
+    setData((prev) => [
+      ...prev.map(el=> {
+          return {
+            number: el.number,
+            isSolution: el.isSolution,
+            state: el.state!==undefined ? "" : undefined,
+          };
+      }),
+    ]);
+  }
+
   const changeState = (id) => {
     setData((prev) => [
       ...prev.map((el, index) => {
@@ -60,12 +68,6 @@ function App() {
     }
     setStatus(
       status
-      /* data[3].number === sum(3) &&
-        data[7].number === sum(7) &&
-        data[11].number === sum(11) &&
-        data[12].number === sum(12) &&
-        data[13].number === sum(13) &&
-        data[14].number === sum(14) */
     );
   };
 
@@ -78,11 +80,6 @@ function App() {
       return "";
     }
   };
-
-  const getStyle=()=>{
-    const a ="repeat(" +(Number(n)+1) +", 150px)"
-    return {gridTemplateColumns: a}
-  }
 
   const sum = (index) => {
     let sum = 0;
@@ -106,7 +103,20 @@ function App() {
 
   useEffect(() => {
     if(finishStatus){
-      console.log("cestitam")
+      setData((prev) => [
+      ...prev.map(el=> {
+        if(el.isSolution){
+          el.state="o"
+        }else if(el.isSolution===false){
+          el.state="×"
+        }
+          return {
+            number: el.number,
+            isSolution: el.isSolution,
+            state: el.state,
+          };
+      }),
+    ]);
     }
   }, [finishStatus]);
 
@@ -116,12 +126,17 @@ function App() {
     isItDone();
   }, [data]);
 
+
+
   return (
     <div className="App">    
-      <Board sum={sum} changeState={changeState} getStyle={getStyle} n={n} data={data}></Board>
-      <div style={finishStatus? {display: "flex"}: {display: "none"}}>
-        <button onClick={() => newGame()}> Restart</button>
-        <Select handleChange={setTempNum}></Select>
+      <Board sum={sum} changeState={changeState} n={n} data={data}></Board>
+      <div className="buttons">
+        <button onClick={() => Restart()}>Restart</button>
+        <div style={finishStatus? {display: "flex"}: {display: "none"}}>
+          <button onClick={() => newGame()}>New Game</button>
+          <Select handleChange={setTempNum}></Select>
+        </div>
       </div>
     </div>
   );
