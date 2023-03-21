@@ -9,14 +9,14 @@ import { useEffect } from "react";
 
 function App() {
   const [n, setNumber] = useState(localStorage.getItem("game") ? Math.sqrt(JSON.parse(localStorage.getItem("game")).length+1)-1 : 3);
-  const [tempNum, setTempNum] = useState();
+  const [tempNum, setTempNum] = useState(n);
   const [data, setData] = useState(JSON.parse(localStorage.getItem("game")) || new Game(n).data);
   const [finishStatus, setStatus] = useState(false);
 
   const newGame=()=>{
     setNumber(Number(tempNum))
     console.log(tempNum, n)
-    setData(new Game(Number(tempNum)).data)
+    setData(new Game(tempNum).data)
   }
    
   const Restart=()=>{
@@ -52,16 +52,17 @@ function App() {
     setStatus(status)
     const num=Number(n);
     for(let i=0; i<num; i++){
-      status=data[(num+1)*i+num].number===sum((num+1)*i+num )
+      status=data[(num+1)*i+num].number===sum((num+1)*i+num)
       if(status===false){
-        return
+        console.log((num+1)*i+num)
+        break
       }
       if(i==num-1)
       {
         for(let j=1; j<=num; j++){
         status=data[(num+1)*i+num+j].number===sum((num+1)*i+num+j)
         if(status===false){
-          return
+          break
         }
         }
       }
