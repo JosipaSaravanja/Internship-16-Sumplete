@@ -15,7 +15,6 @@ function App() {
 
   const newGame=()=>{
     setNumber(Number(tempNum))
-    console.log(tempNum, n)
     setData(new Game(tempNum).data)
   }
    
@@ -47,14 +46,12 @@ function App() {
   };
 
   const isItDone = () => {
-    console.log(data)
     let status=false;
     setStatus(status)
     const num=Number(n);
     for(let i=0; i<num; i++){
       status=data[(num+1)*i+num].number===sum((num+1)*i+num)
       if(status===false){
-        console.log((num+1)*i+num)
         break
       }
       if(i==num-1)
@@ -123,7 +120,6 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("game", JSON.stringify(data))
-    console.log(data)
     isItDone();
   }, [data]);
 
